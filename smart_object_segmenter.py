@@ -113,12 +113,8 @@ class PMS_SmartObjectSegmenter:
             with torch.no_grad():
                 sam_outputs = sam_model(**sam_inputs)
 
-            if "reshaped_input_sizes" in sam_inputs:
-                reshaped_input_sizes = sam_inputs["reshaped_input_sizes"]
-            else:
-                reshaped_input_sizes = torch.tensor([[1024, 1024]], device=device)
             sam_masks = sam_processor.post_process_masks(
-                sam_outputs.pred_masks, sam_inputs.original_sizes, reshaped_input_sizes
+                sam_outputs.pred_masks, sam_inputs.original_sizes
             )
 
             # Get binary mask from SAM
