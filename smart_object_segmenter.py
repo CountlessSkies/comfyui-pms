@@ -144,6 +144,9 @@ class PMS_SmartObjectSegmenter:
             input_tensor = F.to_tensor(input_images).unsqueeze(0).to(device)
             input_tensor = F.normalize(input_tensor, [0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
             
+            model_dtype = next(birefnet_model.parameters()).dtype
+            input_tensor = input_tensor.to(dtype=model_dtype)
+            
             with torch.no_grad():
                 birefnet_output = birefnet_model(input_tensor)
             
