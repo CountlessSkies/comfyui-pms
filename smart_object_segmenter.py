@@ -69,7 +69,7 @@ class PMS_SmartObjectSegmenter:
             results = dino_processor.post_process_grounded_object_detection(
                 dino_outputs, 
                 dino_inputs.input_ids, 
-                box_threshold=dino_threshold, 
+                threshold=dino_threshold, 
                 text_threshold=dino_threshold, 
                 target_sizes=target_sizes.to(device)
             )[0]
