@@ -7,7 +7,7 @@ import comfy.utils
 from transformers import (
     AutoProcessor, 
     AutoModelForZeroShotObjectDetection,
-    Sam2ImageProcessor, 
+    Sam2Processor, 
     Sam2Model,
     AutoModelForImageSegmentation
 )
@@ -95,7 +95,7 @@ class PMS_SmartObjectSegmenter:
             # ==========================================
             # Phase 2: SAM 2
             # ==========================================
-            sam_processor = Sam2ImageProcessor.from_pretrained(sam_repo)
+            sam_processor = Sam2Processor.from_pretrained(sam_repo)
             sam_model = Sam2Model.from_pretrained(sam_repo)
             
             # Load user's local SAM 2.1 state dict if available
