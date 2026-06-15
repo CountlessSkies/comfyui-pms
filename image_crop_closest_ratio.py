@@ -22,8 +22,8 @@ class PMS_ImageCropToClosestAspectRatio:
             }
         }
 
-    RETURN_TYPES = ("IMAGE", "*")
-    RETURN_NAMES = ("image", "aspect_ratio_str")
+    RETURN_TYPES = ("IMAGE", "*", "BOOLEAN")
+    RETURN_NAMES = ("image", "aspect_ratio_str", "needToCrop")
     FUNCTION = "crop"
     CATEGORY = "image/cropping"
 
@@ -84,5 +84,6 @@ class PMS_ImageCropToClosestAspectRatio:
         y_end = min(y_end, h)
 
         cropped_image = image[:, y_start:y_end, x_start:x_end, :]
+        need_to_crop = (new_w != w) or (new_h != h)
 
-        return (cropped_image, best_name)
+        return (cropped_image, best_name, need_to_crop)
