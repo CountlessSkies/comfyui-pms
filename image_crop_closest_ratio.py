@@ -22,7 +22,7 @@ class PMS_ImageCropToClosestAspectRatio:
             }
         }
 
-    RETURN_TYPES = ("IMAGE", "STRING")
+    RETURN_TYPES = ("IMAGE", "*")
     RETURN_NAMES = ("image", "aspect_ratio_str")
     FUNCTION = "crop"
     CATEGORY = "image/cropping"
