@@ -19,6 +19,7 @@ class PMS_ImageCropToClosestAspectRatio:
             "required": {
                 "image": ("IMAGE",),
                 "crop_position": (s.crop_positions, {"default": "center"}),
+                "mode": (["Nano Banana", "Flux"], {"default": "Nano Banana"}),
             }
         }
 
@@ -27,23 +28,32 @@ class PMS_ImageCropToClosestAspectRatio:
     FUNCTION = "crop"
     CATEGORY = "image/cropping"
 
-    def crop(self, image, crop_position):
+    def crop(self, image, crop_position, mode):
         # image shape: [B, H, W, C]
         _, h, w, _ = image.shape
         current_ratio = w / h
 
-        ratios = [
-            ("1:1", 1.0),
-            ("3:2", 1.5),
-            ("2:3", 2.0 / 3.0),
-            ("3:4", 3.0 / 4.0),
-            ("4:3", 4.0 / 3.0),
-            ("4:5", 4.0 / 5.0),
-            ("5:4", 5.0 / 4.0),
-            ("9:16", 9.0 / 16.0),
-            ("16:9", 16.0 / 9.0),
-            ("21:9", 21.0 / 9.0),
-        ]
+        if mode == "Flux":
+            ratios = [
+                ("1:1", 1.0),
+                ("16:9", 16.0 / 9.0),
+                ("9:16", 9.0 / 16.0),
+                ("4:3", 4.0 / 3.0),
+                ("3:4", 3.0 / 4.0),
+            ]
+        else: # "Nano Banana"
+            ratios = [
+                ("1:1", 1.0),
+                ("3:2", 1.5),
+                ("2:3", 2.0 / 3.0),
+                ("3:4", 3.0 / 4.0),
+                ("4:3", 4.0 / 3.0),
+                ("4:5", 4.0 / 5.0),
+                ("5:4", 5.0 / 4.0),
+                ("9:16", 9.0 / 16.0),
+                ("16:9", 16.0 / 9.0),
+                ("21:9", 21.0 / 9.0),
+            ]
 
         # Find the ratio with the minimum absolute difference
         best_name, best_ratio = min(ratios, key=lambda x: abs(current_ratio - x[1]))
