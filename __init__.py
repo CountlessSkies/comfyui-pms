@@ -5,6 +5,7 @@ from .switch_case import PMS_SwitchCase
 from .mask_expand import PMS_MaskExpand
 from .load_images_sequentially import PMS_LoadImageSequenceFromFolder
 from .save_json import PMS_SaveJSON
+from .save_txt import PMS_SaveTXT
 
 NODE_CLASS_MAPPINGS = {
     "PMS_ImageResizeByReference": PMS_ImageResizeByReference,
@@ -14,6 +15,7 @@ NODE_CLASS_MAPPINGS = {
     "PMS_MaskExpand": PMS_MaskExpand,
     "PMS_LoadImageSequenceFromFolder": PMS_LoadImageSequenceFromFolder,
     "PMS_SaveJSON": PMS_SaveJSON,
+    "PMS_SaveTXT": PMS_SaveTXT,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -24,6 +26,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "PMS_MaskExpand": "PMS Mask Expand",
     "PMS_LoadImageSequenceFromFolder": "PMS Load Image Sequence From Folder",
     "PMS_SaveJSON": "PMS Save JSON",
+    "PMS_SaveTXT": "PMS Save TXT",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

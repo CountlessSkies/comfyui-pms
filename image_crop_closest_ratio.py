@@ -29,6 +29,8 @@ class PMS_ImageCropToClosestAspectRatio:
     CATEGORY = "image/cropping"
 
     def crop(self, image, crop_position, mode):
+        if image is None:
+            return (None, "None", False)
         # image shape: [B, H, W, C]
         _, h, w, _ = image.shape
         current_ratio = w / h
