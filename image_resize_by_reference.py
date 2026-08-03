@@ -4,7 +4,7 @@ import comfy.utils
 class PMS_ImageResizeByReference:
     upscale_methods = ["nearest-exact", "bilinear", "area", "bicubic", "lanczos"]
     reference_options = ["height", "width"]
-    resize_modes = ["keep_aspect_ratio", "match_reference_dimensions", "stretch_to_reference"]
+    resize_modes = ["keep_aspect_ratio", "match_reference_dimensions"]
 
     @classmethod
     def INPUT_TYPES(s):
@@ -40,16 +40,10 @@ class PMS_ImageResizeByReference:
             target_height = ref_height
         elif reference_by == "height":
             target_height = ref_height
-            if resize_mode == "keep_aspect_ratio":
-                target_width = max(1, round(original_width * target_height / original_height))
-            else: # stretch_to_reference (stretch height only)
-                target_width = original_width
+            target_width = max(1, round(original_width * target_height / original_height))
         else: # reference_by == "width"
             target_width = ref_width
-            if resize_mode == "keep_aspect_ratio":
-                target_height = max(1, round(original_height * target_width / original_width))
-            else: # stretch_to_reference (stretch width only)
-                target_height = original_height
+            target_height = max(1, round(original_height * target_width / original_width))
             
         s = comfy.utils.common_upscale(samples, target_width, target_height, upscale_method, "disabled")
         s = s.movedim(1, -1)
